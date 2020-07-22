@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="sub_html-head :: html-head"></div>
+    <title>Products - ecommerce</title>
+</head>
+<body>
+<th:block th:include="sub_header"></th:block>
+
+<main role="main" class="container">
+    <div class="jumbotron">
+        <div>
+        <h4>Products</h4>
+        <table class="table">
+            <thead><tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+            </tr></thead>
+            <tbody>
+                <tr th:each="product : ${productPage.content}">
+                    <th scope="row" th:text="${product.id}" />
+                    <td th:text="${product.name}" />
+                    <td th:text="${product.price}" />
+                    <td style="width: 1px"><a th:href="@{/products/details(id=${product.id})}" class="btn btn-primary btn-sm" role="button">Details</a></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <ul class="pagination">
+            <div th:if="${productPage.totalPages > 0}" th:each="pageNumber : ${pages}">
+                <li class="page-item">
+                    <a class="page-link" th:text="${pageNumber}" th:href="@{/products(page=${pageNumber}, size=${productPage.size}, search=${param?.search} , sort=0)}"></a>
+                </li>
+            </div>
+        </ul>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

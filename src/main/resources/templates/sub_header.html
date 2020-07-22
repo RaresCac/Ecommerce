@@ -1,0 +1,44 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand">ecommerce</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/products}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/cart}">Cart</a>
+                </li>
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                            <a class="dropdown-item" th:href="@{/admin/orders}">View orders</a>
+                            <a class="dropdown-item" th:href="@{/admin/products}">Modify products</a>
+                        </div>
+                    </li>
+                </th:block>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" method="get"  th:action="@{/products}">
+                <input class="form-control mr-sm-2" type="text" name="search" th:placeholder="${(param.search != null) ? param.search : 'Search'}" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <th:block sec:authorize="isFullyAuthenticated()">
+                <div class="text-light" style="margin-left:10px;">Logged as: <span sec:authentication="name"></span></div>
+                <a th:href="@{/logout}" class="btn btn-outline-info" style="margin-left:10px;" role="button">Logout</a>
+            </th:block>
+            <th:block sec:authorize="!isFullyAuthenticated()">
+                <a th:href="@{/login}" class="btn btn-outline-info" style="margin-left:10px;" role="button">Login</a>
+                <a th:href="@{/register}" class="btn btn-outline-info" style="margin-left:10px;" role="button">Register</a>
+            </th:block>
+        </div>
+    </nav>
+</div>

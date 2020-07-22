@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="sub_html-head :: html-head"></div>
+    <title>ecommerce</title>
+</head>
+<body>
+<th:block th:include="sub_header"></th:block>
+
+<main role="main" class="container">
+    <div class="jumbotron">
+        <h4>Checkout</h4>
+        <form id="addProductForm" th:object="${checkoutDTO}" th:action="@{/cart/checkout/process}" method="post">
+            <div class="form-group">
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Name" th:field="*{name}" name="name">
+            </div>
+            <div class="form-group">
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</p>
+                <label>Email</label>
+                <input type="text" class="form-control" placeholder="Email" th:field="*{email}">
+            </div>
+            <div class="form-group">
+                <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Name Error</p>
+                <label>Address</label>
+                <input type="text" class="form-control" placeholder="Address" th:field="*{address}">
+            </div>
+            <div class="form-group">
+                <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</p>
+                <label>City</label>
+                <input type="text" class="form-control" placeholder="City" th:field="*{city}">
+            </div>
+            <div class="form-group">
+                <p th:if="${#fields.hasErrors('state')}" th:errors="*{state}">Name Error</p>
+                <label>State</label>
+                <input type="text" class="form-control" placeholder="State" th:field="*{state}">
+            </div>
+            <div class="form-group">
+                <p th:if="${#fields.hasErrors('country')}" th:errors="*{country}">Name Error</p>
+                <label>Country</label>
+                <input type="text" class="form-control" placeholder="Country" th:field="*{country}">
+            </div>
+            <div class="form-group">
+                <p th:if="${#fields.hasErrors('postcode')}" th:errors="*{postcode}">Name Error</p>
+                <label>Postcode</label>
+                <input type="text" class="form-control" placeholder="Postcode" th:field="*{postcode}">
+            </div>
+            <button type="submit" class="btn btn-primary">Complete order</button>
+        </form>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
